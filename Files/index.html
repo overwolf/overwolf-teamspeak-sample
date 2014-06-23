@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>test page for TeamSpeak Object NPAPI</title>
+</head>
+    <script type="text/javascript">
+        function plugin0()
+        {
+            return document.getElementById('plugin0');
+        }
+        plugin = plugin0;
+        function addEvent(obj, name, func)
+        {
+            if (obj.attachEvent) {
+                obj.attachEvent("on"+name, func);
+            } else {
+                obj.addEventListener(name, func, false); 
+            }
+        }
+        
+        function load()
+        {
+ 
+        }
+        function pluginLoaded() {
+            alert("Plugin loaded!");
+
+            plugin().addEventListener("onServerStatusChange", function(data) {
+                console.log("onServerStatusChang: ",data);
+            });
+			
+			setTimeout(function() {
+			
+				plugin().init({name: "Overwolf-TeamSpeak-Sample"}, function(result,servers) {
+				 console.log("result: ",result ,servers);
+					
+				  // no server is connected
+				  if (servers && !servers.activeServerId)  {
+					 plugin().connectToServer( { tab :"currentTab", 
+												label:"ts3 public server", 
+												address :"voice.teamspeak.com", 
+												nickName:"bFox" },
+												function(result,server) {
+					   console.log("start new connection: ",result , server)
+					 });
+			     } else {
+				 
+					 plugin().getAllServersInfo(function(errorObject,servers) {
+					  console.log("All servers:" ,result , servers);
+					 });
+				 }
+				});
+				
+			}, 500);
+
+        }
+
+    </script>
+<body onload="load()">
+<object id="plugin0" type="application/x-overwolfteamspeakplugin">
+	<param name="onload" value="pluginLoaded" />
+</object>
+    
+</body>
+</html>

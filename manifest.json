@@ -1,0 +1,26 @@
+{
+	"manifest_version":1,
+	"type":"WebApp",
+	"meta":{
+		"name":"TeamSpeak API Demo App",
+		"version":"1.0.0",
+		"minimum-overwolf-version": "0.77.1.0",
+		"author":"Developer Name",
+		"icon":"IconMouseOver.png",
+		"icon_gray":"IconMouseNormal.png",
+		"description":"TeamSpeak API Demo App"
+	},
+	"data": {
+		"start_window":"index",
+		"windows":{
+			"index":{
+					"file":"Files/index.html",
+					"transparent":false,
+					"resizable":true,
+					"size":{"width":1000, "height":800},
+					"min_size":{"width":200, "height":200},
+					"max_size":{"width":1000, "height":1000}
+				}
+		}
+	}
+}
